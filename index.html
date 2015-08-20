@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+
+#container1 {
+	position: relative;
+	width: 600px;
+	height: 400px;
+	margin: 0 auto;
+	outline: 1px solid black;
+}
+
+#container2 {
+	position: relative;
+	width: 200px;
+	height: 400px;
+	outline: 1px solid black;
+	left: 75%;
+	bottom: 400px;
+}
+
+#container3 {
+	position: relative;
+	width: 200px;
+	height: 400px;
+	outline: 1px solid black;
+	left: 9.6%;
+	bottom: 800px;
+}
+
+#circle {
+	border-radius: 50%;
+	width: 100px;
+	height: 100px;
+	background: blue;
+	position: absolute;
+	top: 150px;
+	left: 245px;
+}
+
+#box {
+	width: 100px;
+	height: 100px;
+	background: blue;
+	position: absolute;
+	top: 150px;
+	left: 245px;
+}
+
+#container2 button {
+	position: absolute;
+	width: 60px;
+	height: 60px;
+}
+
+#container3 button {
+	position: absolute;
+	width: 60px;
+	height: 30px;
+}
+
+#text {
+	width: 350px;
+	height: 50px;
+}
+
+#text2 {
+	position: absolute;
+	margin-left: 43px;
+	text-decoration: underline;
+}
+
+#colorSelect {
+	position: absolute;
+	margin-left: 20px;
+	text-decoration: underline;
+}
+
+
+/* Override original Id styles on border-touch */
+
+.reset_fix {
+	border-radius: 50% !important;
+	border: none !important;
+	background: blue !important;
+	width: 100px !important;
+	height: 100px !important;
+}
+
+.half_top {
+	height: 50px !important;
+	border-top: 50px solid red !important;
+}
+
+.half_bot {
+	height: 50px !important;
+	border-bottom: 50px solid red !important;
+}
+
+.half_left {
+	width: 50px !important;
+	border-left: 50px solid red !important;
+}
+
+.half_right {
+	width: 50px !important;
+	border-right: 50px solid red !important;
+}
+
+</style>
+</head>
+<body>
+	<div id="container1">
+		<div id="circle"></div>
+	</div>
+
+	<div id="container2">
+		<h2 id="text" style="position: absolute; top: 25px; left: 35px;"></h1>
+		<button id="upBtn" style="top: 120px; left: 70px;">Up</button>
+		<button id="downBtn" style="top: 230px; left: 70px;">Down</button>
+		<button id="leftBtn" style="top: 170px;">Left</button>
+		<button id="rightBtn" style="top: 170px; left: 140px;">Right</button>
+		<button id="reset" style=" top: 330px; left: 70px; color: red;">Reset</button>
+	</div>
+
+	<div id="container3">
+		<h2 id="text2">Transform</h2>
+		<button id="circleBtn" style="top: 60px; left: 30px;">Circle</button>
+		<button id="boxBtn" style="top: 60px; left: 105px;">Box</button>
+		<h2 id="colorSelect" style="top: 100px;">Color Selection</h2>
+		<button id="color1" style="top: 170px; left: 33px; width: 130px;">Green</button>
+		<button id="color2" style="top: 210px; left: 33px; width: 130px;">Purple</button>
+		<button id="color3" style="top: 250px; left: 33px; width: 130px;">Yellow</button>
+		<button id="color4" style="top: 290px; left: 33px; width: 130px;">Teal</button>
+		<footer style="position: absolute; bottom: 0; background: #909090; width: 200px; height: 30px;"><p style="margin: 7px 0 0 50px;">Dennis Ilyaev</p></footer>
+	</div>
+
+	<script type="text/javascript">
+
+	var up = document.getElementById('upBtn'),
+		down = document.getElementById('downBtn'),
+		left = document.getElementById('leftBtn'),
+		right = document.getElementById('rightBtn'),
+		reset = document.getElementById('reset');
+		circle = document.getElementById('circle'),
+		text = document.getElementById('text'),
+		circleBtn = document.getElementById('circleBtn'),
+		boxBtn = document.getElementById('boxBtn'),
+		green = document.getElementById('color1'),
+		purple = document.getElementById('color2'),
+		yellow = document.getElementById('color3'),
+		teal = document.getElementById('color4'),
+		circleVer = 150, // Vertical-position
+		circleHori = 245; // Horizontal-position
+
+
+		function upFunc() {
+
+			var interval = setInterval(function() {
+			circleVer -= 1;
+			circle.style.top = circleVer + 'px';
+			circle.removeAttribute('class', 'half_bot');
+			text.innerHTML = "Going up"
+			text.style.left = 50 + 'px';
+
+			if (circle.style.left === 0 + 'px') {
+				circle.setAttribute('class', 'half_left');
+			}
+
+			if (circle.style.left === 500 + 'px') {
+				circle.setAttribute('class', 'half_right');
+			}
+			
+			if (circleVer <= 0) {
+				circleVer += 1;
+				circle.setAttribute('class', 'half_top');
+				text.innerHTML = "Reached top!"
+				text.style.left = 35 + 'px';
+				clearInterval(interval);
+				
+			}
+
+			if (circle.style.top === 0 + 'px' && circle.style.left === 0 + 'px' == true) {
+				circle.setAttribute('class', 'half_top half_left');
+			}
+
+			if (circle.style.top === 0 + 'px' && circle.style.left === 500 + 'px' == true) {
+				circle.setAttribute('class', 'half_top half_right');
+			}
+
+			});
+
+		}
+
+		function downFunc() {
+
+			var interval = setInterval(function() {
+			circleVer += 1;
+			circle.style.top = circleVer + 'px';
+			circle.removeAttribute('class', 'half_top');
+			text.innerHTML = "Going down";
+			text.style.left = 36 + 'px';
+
+			if (circle.style.left === 500 + 'px') {
+				circle.setAttribute('class', 'half_right');
+			}
+
+			if (circle.style.left === 0 + 'px') {
+				circle.setAttribute('class', 'half_left');
+			}
+
+			if (circleVer >= 300) {
+				circleVer -= 1;
+				circle.setAttribute('class', 'half_bot');
+				text.innerHTML = "Reached bottom!"
+				text.style.left = 15 + 'px';
+				clearInterval(interval);
+			}
+
+			if (circle.style.top === 300 + 'px' && circle.style.left === 0 + 'px' == true)	 {
+				circle.setAttribute('class', 'half_bot half_left');
+			}
+
+			if (circle.style.top === 300 + 'px' && circle.style.left === 500 + 'px' == true) {
+				circle.setAttribute('class', 'half_bot half_right');
+			}
+
+			});
+	
+		}
+
+		function leftFunc() {
+
+			var interval = setInterval(function() {
+			circleHori -= 1;
+			circle.style.left = circleHori + 'px';
+			circle.removeAttribute('class', 'half_right');
+			text.innerHTML = "Going left";
+			text.style.left = 47 + 'px';
+
+			if (circle.style.top === 0 + 'px') {
+				circle.setAttribute('class', 'half_top');
+			}
+
+			if (circle.style.top === 300 + 'px') {
+				circle.setAttribute('class', 'half_bot');
+			}
+
+			if (circleHori <= 0) {
+				circleHori += 1;
+				circle.setAttribute('class', 'half_left');
+				text.innerHTML = "Reached left!";
+				text.style.left = 32 + 'px';
+				clearInterval(interval);
+			}
+
+			if (circle.style.top === 0 + 'px' && circle.style.left === 0 + 'px' == true) {
+				circle.setAttribute('class', 'half_top half_left');
+			}
+
+			if (circle.style.top === 300 + 'px' && circle.style.left === 0 + 'px' == true) {
+				circle.setAttribute('class', 'half_bot half_left');
+			}
+
+			});
+
+		}
+
+		function rightFunc() {
+
+			var interval = setInterval(function() {
+			circleHori += 1;
+			circle.style.left = circleHori + 'px';
+			circle.removeAttribute('class', 'half_left');
+			text.innerHTML = "Going right";
+			text.style.left = 40 + 'px';
+
+			if (circle.style.top === 0 + 'px') {
+				circle.setAttribute('class', 'half_top');
+			}
+
+			if (circle.style.top === 300 + 'px') {
+				circle.setAttribute('class', 'half_bot');
+			}
+
+			if (circleHori >= 500) {
+				circleHori -= 1;
+				circle.setAttribute('class', 'half_right');
+				text.innerHTML = "Reached right!";
+				text.style.left = 28 + 'px';
+				clearInterval(interval);
+			}
+
+			if (circle.style.top === 300 + 'px' && circle.style.left === 500 + 'px' == true) {
+				circle.setAttribute('class', 'half_bot half_right');
+			} 	
+
+			if (circle.style.top === 0 + 'px' && circle.style.left === 500 + 'px' == true) {
+				circle.setAttribute('class', 'half_top half_right');
+			}
+
+			});
+
+		}
+
+		function boxTransform() {
+			circle.removeAttribute('id', 'circle');
+			circle.setAttribute('id', 'box');
+			boxBtn.style.color = "red";
+			boxBtn.style.border = "1px solid red";
+			circleBtn.style.border = "";
+			circleBtn.style.color = "#000";
+
+		}
+
+		function circleTransform() {
+			circle.removeAttribute('id', 'box');
+			circle.setAttribute('id', 'circle');
+			circleBtn.style.color = "red";
+			circleBtn.style.border = "1px solid red";
+			boxBtn.style.border = "";
+			boxBtn.style.color = "#000";
+
+		}
+
+		function greenColor() {
+			purple.style.color = "";
+			yellow.style.color = "";
+			teal.style.color = "";
+			purple.style.border = "";
+			yellow.style.border = "";
+			teal.style.border = "";
+			green.style.color = "green";
+			green.style.border = "2px solid green";
+			circle.style.backgroundColor = "green";
+		}
+
+		function purpleColor() {
+			green.style.color = "";
+			yellow.style.color = "";
+			teal.style.color = "";
+			green.style.border = "";
+			yellow.style.border = "";
+			teal.style.border = "";
+			purple.style.color = "purple";
+			purple.style.border = "2px solid purple";
+			circle.style.backgroundColor = "purple";
+		}
+
+		function yellowColor() {
+			purple.style.color = "";
+			green.style.color = "";
+			teal.style.color = "";
+			purple.style.border = "";
+			green.style.border = "";
+			teal.style.border = "";
+			yellow.style.color = "yellow";
+			yellow.style.border = "2px solid yellow";
+			circle.style.backgroundColor = "yellow";
+		}
+
+		function tealColor() {
+			purple.style.color = "";
+			yellow.style.color = "";
+			green.style.color = "";
+			purple.style.border = "";
+			yellow.style.border = "";
+			green.style.border = "";
+			teal.style.color = "teal";
+			teal.style.border = "2px solid teal";
+			circle.style.backgroundColor = "teal";
+		}
+
+		function resetFunc() {
+			circleVer = 150;
+			circleHori = 245;
+			circle.style.top = circleVer + 'px';
+			circle.style.left = circleHori + 'px';
+			circle.setAttribute('class', 'reset_fix');
+			circle.removeAttribute('class', 'reset_fix');
+			circle.setAttribute('id', 'circle');
+			circle.style.backgroundColor = 'blue';
+			text.innerHTML = "";
+			circleBtn.style.color = "#000";
+			boxBtn.style.color = "#000";
+			boxBtn.style.border = "";
+			circleBtn.style.border = "";
+			purple.style.color = "";
+			yellow.style.color = "";
+			teal.style.color = "";
+			green.style.color = "";
+			purple.style.border = "";
+			yellow.style.border = "";
+			green.style.border = "";
+			teal.style.border = "";
+		}
+
+		up.addEventListener('click', upFunc, false);
+		down.addEventListener('click', downFunc, false);
+		left.addEventListener('click', leftFunc, false);
+		right.addEventListener('click', rightFunc, false);
+		reset.addEventListener('click', resetFunc, false);
+		boxBtn.addEventListener('click', boxTransform, false);
+		circleBtn.addEventListener('click', circleTransform, false);
+		green.addEventListener('click', greenColor, false);
+		purple.addEventListener('click', purpleColor, false);
+		yellow.addEventListener('click', yellowColor, false);
+		teal.addEventListener('click', tealColor, false);
+
+</script>
+</body>
+</html>
