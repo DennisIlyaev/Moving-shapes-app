@@ -29,6 +29,21 @@
 	bottom: 800px;
 }
 
+#container4 {
+	position: relative;
+	width: 200px;
+	height: 120px;
+	outline: 1px solid black;
+	left: 75%;
+	bottom: 770px;
+}
+
+#container4 button {
+	position: absolute;
+	width: 100px;
+	height: 35px;
+}
+
 #circle {
 	border-radius: 50%;
 	width: 100px;
@@ -75,6 +90,12 @@
 	position: absolute;
 	margin-left: 20px;
 	text-decoration: underline;
+}
+
+#controller {
+	position: absolute;
+	text-decoration: underline;
+	margin-left: 35px;
 }
 
 
@@ -136,6 +157,13 @@
 		<footer style="position: absolute; bottom: 0; background: #909090; width: 200px; height: 30px;"><p style="margin: 7px 0 0 50px;">Dennis Ilyaev</p></footer>
 	</div>
 
+	<div id="container4">
+		<h2 id="controller">Arrow Keys</h2>
+		<button id="enableBtn" style="top: 65px;">Enable</button>
+		<button id="disableBtn" style="top: 65px; left: 100px;">Disable</button>
+		<footer id="arrowsFooter" style="position: absolute; bottom: 0; width: 200px; height: 20px; background-color: #909090;"></footer>
+	</div>
+
 	<script type="text/javascript">
 
 	var up = document.getElementById('upBtn'),
@@ -151,6 +179,9 @@
 		purple = document.getElementById('color2'),
 		yellow = document.getElementById('color3'),
 		teal = document.getElementById('color4'),
+		enableBtn = document.getElementById('enableBtn'),
+		disableBtn = document.getElementById('disableBtn'),
+		arrowsFooter = document.getElementById('arrowsFooter'),
 		circleVer = 150, // Vertical-position
 		circleHori = 245; // Horizontal-position
 
@@ -394,6 +425,31 @@
 			yellow.style.border = "";
 			green.style.border = "";
 			teal.style.border = "";
+			enableBtn.style.color = "";
+			enableBtn.style.border = "";
+			arrowsFooter.style.backgroundColor = "#909090";
+			disableBtn.style.color = "";
+			disableBtn.style.border = "";
+			arrowDisabled();
+		}
+
+		function enabled() {
+			enableBtn.style.color = "#00FF00";
+			enableBtn.style.border = "2px solid #00FF00";
+			arrowsFooter.style.backgroundColor = "#00FF00"
+			disableBtn.style.color = "";
+			disableBtn.style.border = "";
+			arrowFunc();
+		}
+
+		function disabled() {
+			disableBtn.style.color = "red";
+			disableBtn.style.border = "2px solid red";
+			arrowsFooter.style.backgroundColor = "red";
+			enableBtn.style.color = "";
+			enableBtn.style.border = "";
+			arrowDisabled();
+
 		}
 
 		up.addEventListener('click', upFunc, false);
@@ -407,6 +463,48 @@
 		purple.addEventListener('click', purpleColor, false);
 		yellow.addEventListener('click', yellowColor, false);
 		teal.addEventListener('click', tealColor, false);
+		enableBtn.addEventListener('click', enabled, false);
+		disableBtn.addEventListener('click', disabled, false);
+
+		var arrowFunc = function() {
+
+		document.onkeydown = function(e) {
+    	switch (e.keyCode) {
+        case 37:
+            leftFunc();
+            break;
+        case 38:
+            upFunc();
+            break;
+        case 39:
+            rightFunc();
+            break;
+        case 40:
+            downFunc();
+            break;
+    	}
+	};
+};
+
+		var arrowDisabled = function() {
+			
+		document.onkeydown = function(e) {
+    	switch (e.keyCode) {
+        case 37:
+            null
+            break;
+        case 38:
+            null
+            break;
+        case 39:
+            null
+            break;
+        case 40:
+            null
+            break;
+    	}
+	};
+};
 
 </script>
 </body>
