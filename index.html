@@ -186,17 +186,18 @@ body {
 		enableBtn = document.getElementById('enableBtn'),
 		disableBtn = document.getElementById('disableBtn'),
 		arrowsFooter = document.getElementById('arrowsFooter'),
+		interval = '',
 		circleVer = 150, // Vertical-position
 		circleHori = 245; // Horizontal-position
 
 
 		function upFunc() {
-
-			var interval = setInterval(function() {
+			clearInterval(interval);
+			interval = setInterval(function() {
 			circleVer -= 1;
 			circle.style.top = circleVer + 'px';
 			circle.removeAttribute('class', 'half_bot');
-			text.innerHTML = "Going up"
+			text.innerHTML = "Going up";
 			text.style.left = 50 + 'px';
 
 			if (circle.style.left === 0 + 'px') {
@@ -210,7 +211,7 @@ body {
 			if (circleVer <= 0) {
 				circleVer += 1;
 				circle.setAttribute('class', 'half_top');
-				text.innerHTML = "Reached top!"
+				text.innerHTML = "Reached top!";
 				text.style.left = 35 + 'px';
 				clearInterval(interval);
 				
@@ -225,12 +226,12 @@ body {
 			}
 
 			});
-
+			
 		}
 
 		function downFunc() {
-
-			var interval = setInterval(function() {
+			clearInterval(interval);
+			interval = setInterval(function() {
 			circleVer += 1;
 			circle.style.top = circleVer + 'px';
 			circle.removeAttribute('class', 'half_top');
@@ -248,7 +249,7 @@ body {
 			if (circleVer >= 300) {
 				circleVer -= 1;
 				circle.setAttribute('class', 'half_bot');
-				text.innerHTML = "Reached bottom!"
+				text.innerHTML = "Reached bottom!";
 				text.style.left = 15 + 'px';
 				clearInterval(interval);
 			}
@@ -266,8 +267,8 @@ body {
 		}
 
 		function leftFunc() {
-
-			var interval = setInterval(function() {
+			clearInterval(interval);
+			interval = setInterval(function() {
 			circleHori -= 1;
 			circle.style.left = circleHori + 'px';
 			circle.removeAttribute('class', 'half_right');
@@ -303,8 +304,8 @@ body {
 		}
 
 		function rightFunc() {
-
-			var interval = setInterval(function() {
+			clearInterval(interval);
+			interval = setInterval(function() {
 			circleHori += 1;
 			circle.style.left = circleHori + 'px';
 			circle.removeAttribute('class', 'half_left');
@@ -335,7 +336,7 @@ body {
 				circle.setAttribute('class', 'half_top half_right');
 			}
 
-			});
+		});
 
 		}
 
@@ -440,7 +441,7 @@ body {
 		function enabled() {
 			enableBtn.style.color = "#00FF00";
 			enableBtn.style.border = "2px solid #00FF00";
-			arrowsFooter.style.backgroundColor = "#00FF00"
+			arrowsFooter.style.backgroundColor = "#00FF00";
 			disableBtn.style.color = "";
 			disableBtn.style.border = "";
 			arrowFunc();
@@ -495,20 +496,24 @@ body {
 		document.onkeydown = function(e) {
     	switch (e.keyCode) {
         case 37:
-            null
+            null;
             break;
         case 38:
-            null
+            null;
             break;
         case 39:
-            null
+            null;
             break;
         case 40:
-            null
+            null;
             break;
     	}
 	};
 };
+
+
+
+
 
 </script>
 </body>
