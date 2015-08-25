@@ -186,14 +186,18 @@ body {
 		enableBtn = document.getElementById('enableBtn'),
 		disableBtn = document.getElementById('disableBtn'),
 		arrowsFooter = document.getElementById('arrowsFooter'),
-		interval = '',
+		intervalUp = '',
+		intervalDown = '',
+		intervalRight = '',
+		intervalLeft = '',
 		circleVer = 150, // Vertical-position
 		circleHori = 245; // Horizontal-position
 
 
 		function upFunc() {
-			clearInterval(interval);
-			interval = setInterval(function() {
+			clearInterval(intervalDown);
+			clearInterval(intervalUp);
+			intervalUp = setInterval(function() {
 			circleVer -= 1;
 			circle.style.top = circleVer + 'px';
 			circle.removeAttribute('class', 'half_bot');
@@ -213,7 +217,7 @@ body {
 				circle.setAttribute('class', 'half_top');
 				text.innerHTML = "Reached top!";
 				text.style.left = 35 + 'px';
-				clearInterval(interval);
+				clearInterval(intervalUp);
 				
 			}
 
@@ -230,8 +234,9 @@ body {
 		}
 
 		function downFunc() {
-			clearInterval(interval);
-			interval = setInterval(function() {
+			clearInterval(intervalUp);
+			clearInterval(intervalDown);
+			intervalDown = setInterval(function() {
 			circleVer += 1;
 			circle.style.top = circleVer + 'px';
 			circle.removeAttribute('class', 'half_top');
@@ -251,7 +256,7 @@ body {
 				circle.setAttribute('class', 'half_bot');
 				text.innerHTML = "Reached bottom!";
 				text.style.left = 15 + 'px';
-				clearInterval(interval);
+				clearInterval(intervalDown);
 			}
 
 			if (circle.style.top === 300 + 'px' && circle.style.left === 0 + 'px' == true)	 {
@@ -267,8 +272,9 @@ body {
 		}
 
 		function leftFunc() {
-			clearInterval(interval);
-			interval = setInterval(function() {
+			clearInterval(intervalRight);
+			clearInterval(intervalLeft);
+			intervalLeft = setInterval(function() {
 			circleHori -= 1;
 			circle.style.left = circleHori + 'px';
 			circle.removeAttribute('class', 'half_right');
@@ -288,7 +294,7 @@ body {
 				circle.setAttribute('class', 'half_left');
 				text.innerHTML = "Reached left!";
 				text.style.left = 32 + 'px';
-				clearInterval(interval);
+				clearInterval(intervalLeft);
 			}
 
 			if (circle.style.top === 0 + 'px' && circle.style.left === 0 + 'px' == true) {
@@ -304,8 +310,9 @@ body {
 		}
 
 		function rightFunc() {
-			clearInterval(interval);
-			interval = setInterval(function() {
+			clearInterval(intervalLeft);
+			clearInterval(intervalRight);
+			intervalRight = setInterval(function() {
 			circleHori += 1;
 			circle.style.left = circleHori + 'px';
 			circle.removeAttribute('class', 'half_left');
@@ -325,7 +332,7 @@ body {
 				circle.setAttribute('class', 'half_right');
 				text.innerHTML = "Reached right!";
 				text.style.left = 28 + 'px';
-				clearInterval(interval);
+				clearInterval(intervalRight);
 			}
 
 			if (circle.style.top === 300 + 'px' && circle.style.left === 500 + 'px' == true) {
@@ -347,7 +354,6 @@ body {
 			boxBtn.style.border = "1px solid red";
 			circleBtn.style.border = "";
 			circleBtn.style.color = "#000";
-
 		}
 
 		function circleTransform() {
@@ -436,7 +442,10 @@ body {
 			disableBtn.style.color = "";
 			disableBtn.style.border = "";
 			arrowDisabled();
-			clearInterval(interval);
+			clearInterval(intervalUp);
+			clearInterval(intervalDown);
+			clearInterval(intervalLeft);
+			clearInterval(intervalRight);
 		}
 
 		function enabled() {
@@ -473,7 +482,6 @@ body {
 		disableBtn.addEventListener('click', disabled, false);
 
 		var arrowFunc = function() {
-			
 		document.onkeydown = function(e) {
     	switch (e.keyCode) {
         case 37:
@@ -493,7 +501,6 @@ body {
 };
 
 		var arrowDisabled = function() {
-			
 		document.onkeydown = function(e) {
     	switch (e.keyCode) {
         case 37:
@@ -511,9 +518,6 @@ body {
     	}
 	};
 };
-
-
-
 
 
 </script>
